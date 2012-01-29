@@ -27,9 +27,6 @@
     <ClInclude Include="src\glsl_shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\matrix_stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -45,6 +42,12 @@
     <ClInclude Include="src\vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\camera.cpp">
@@ -53,13 +56,7 @@
     <ClCompile Include="src\color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\glsl_shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
@@ -78,6 +75,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\vertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

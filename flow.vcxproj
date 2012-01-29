@@ -91,11 +91,11 @@
     <ClInclude Include="src\polygon.h" />
     <ClInclude Include="src\transform_pipeline.h" />
     <ClInclude Include="src\vertex.h" />
+    <ClInclude Include="src\window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
-    <ClCompile Include="src\debug.cpp" />
     <ClCompile Include="src\glsl_shader.cpp" />
     <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -104,6 +104,7 @@
     <ClCompile Include="src\polygon.cpp" />
     <ClCompile Include="src\transform_pipeline.cpp" />
     <ClCompile Include="src\vertex.cpp" />
+    <ClCompile Include="src\window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
