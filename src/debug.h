@@ -2,14 +2,16 @@
 #define __DEBUG_H__
 
 #include <string>
-#include <fstream>
+#include <iostream>
 
 namespace Debug
 {
-	static void error( std::string msg )
-	{}
-	static void report( std::string msg )
-	{}
+	inline std::ostream& debug()
+	{
+		return std::cout;
+	}
 };
+
+using namespace Debug;
 
 #endif

@@ -2,22 +2,20 @@
 #include "input.h"
 #include "window.h"
 
-using namespace slge;
+Input *Input::instance = NULL;
 
-input *input::instance = NULL;
-
-input::input()
+Input::Input()
 {
 	if( instance != NULL )
-		std::cerr << "Only one input context may be active at a time.";
+		std::cerr << "Only one Input context may be active at a time.";
 	instance = this;
 }
 
-input::~input()
+Input::~Input()
 {
 }
 
-void input::init()
+void Input::init()
 {
 	for( unsigned int i = 0; i < MAX_KEYS; ++i )
 		prev_key_events[i] = curr_key_events[i] = key_events[i] = false;
@@ -26,7 +24,7 @@ void input::init()
 		prev_mouse_buttons[i] = curr_mouse_buttons[i] = mouse_button_events[i] = false;
 }
 
-void input::update()
+void Input::update()
 {
 	for( unsigned int i = 0; i < MAX_KEYS; ++i )
 	{
@@ -44,22 +42,22 @@ void input::update()
 ///////////////////////////////////////////////////////////////////////////////
 // K E Y S A P I
 ///////////////////////////////////////////////////////////////////////////////
-void input::key_event( int key, int action )
+void Input::key_event( int key, int action )
 {
 	instance->key_events[key] = action > 0 ? true : false;
 }
 
-bool input::is_key_held( int k )
+bool Input::is_key_held( int k )
 {
 	return instance->curr_key_events[k];
 }
 
-bool input::is_key_pressed( int k )
+bool Input::is_key_pressed( int k )
 {
 	return instance->curr_key_events[k] && !instance->prev_key_events[k];
 }
 
-bool input::is_key_released( int k )
+bool Input::is_key_released( int k )
 {
 	return !instance->curr_key_events[k] && instance->prev_key_events[k];
 }
@@ -67,39 +65,39 @@ bool input::is_key_released( int k )
 ///////////////////////////////////////////////////////////////////////////////
 // M O U S E A P I
 ///////////////////////////////////////////////////////////////////////////////
-void input::mouse_down_event( int key, int action )
+void Input::mouse_down_event( int key, int action )
 {
 	instance->mouse_button_events[key] = action > 0 ? true : false;
 }
 
-void input::mouse_move_event( int x, int y )
+void Input::mouse_move_event( int x, int y )
 {
-	instance->mouse_position = vec2( x, y );
+	instance->mouse_position = glm::vec2( x, y );
 }
 
-bool input::is_mouse_button_held( int b )
+bool Input::is_mouse_button_held( int b )
 {
 	return instance->curr_mouse_buttons[b];
 }
 
-bool input::is_mouse_button_pressed( int b )
+bool Input::is_mouse_button_pressed( int b )
 {
 	return instance->curr_mouse_buttons[b] && !instance->prev_mouse_buttons[b];
 }
 
-bool input::is_mouse_button_released( int b )
+bool Input::is_mouse_button_released( int b )
 {
 	return !instance->curr_mouse_buttons[b] && instance->prev_mouse_buttons[b];
 }
 
-vec2 input::get_mouse_position()
+glm::vec2 Input::get_mouse_position()
 {
-	return vec2( instance->mouse_position );
+	return glm::vec2( instance->mouse_position );
 }
 
-vec2 input::get_mouse_percentage()
+glm::vec2 Input::get_mouse_percentage()
 {
-	return vec2( 	instance->mouse_position.x / window::get_width(),
-					instance->mouse_position.y / window::get_height() );
+	return glm::vec2( 	instance->mouse_position.x / Window::get_width(),
+					instance->mouse_position.y / Window::get_height() );
 }
 

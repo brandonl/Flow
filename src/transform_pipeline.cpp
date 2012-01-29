@@ -8,7 +8,7 @@ Transform_Pipeline::Transform_Pipeline()
 	: current_matrix(MODEL_VIEW)
 {
 	if( instance != NULL )
-		Debug::error( "Only one instance may be active at a time." );
+		debug() << "Only one instance may be active at a time.\n";
 	instance = this;
 
 	instance->model_view.load_identity();
@@ -103,7 +103,6 @@ void Transform_Pipeline::rotate( float theta, float x, float y, float z )
 		instance->projection.rotate( theta, x, y, z );
 		break;
 	}
-
 }
 
 const glm::mat4& Transform_Pipeline::get_mvp()

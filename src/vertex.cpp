@@ -67,9 +67,9 @@ Vertex::Vertex( float x, float y, float z, const Color& col )
 	memcpy( color, &col, sizeof(Color) );
 	tex0[0] = 0.0f;
 	tex0[1] = 0.0f;
-    memset( normal, 0, sizeof(float)*3 );
-    memset( tex1,	0, sizeof(float)*2 );
-    memset( tex2,	0, sizeof(float)*2 );
+	memset( normal, 0, sizeof(float)*3 );
+	memset( tex1,	0, sizeof(float)*2 );
+	memset( tex2,	0, sizeof(float)*2 );
 }
 
 Vertex::Vertex( float x, float y, float z, float u, float v, float normx, float normy, float normz, const Color& col )
@@ -80,11 +80,11 @@ Vertex::Vertex( float x, float y, float z, float u, float v, float normx, float 
 	tex0[0] = u;
 	tex0[1] = v;
 	memcpy( color, &col, sizeof(Color) );
-    normal[0] = normx;
+	normal[0] = normx;
 	normal[1] = normy;
 	normal[2] = normz;
-    memset( tex1,	0, sizeof(float)*2 );
-    memset( tex2,	0, sizeof(float)*2 );
+	memset( tex1,	0, sizeof(float)*2 );
+	memset( tex2,	0, sizeof(float)*2 );
 }
 
 Vertex::Vertex( float *vertices, float *color, float *tex_coords )
@@ -92,8 +92,8 @@ Vertex::Vertex( float *vertices, float *color, float *tex_coords )
 	memcpy( position, vertices, sizeof(vertices) );
 	memcpy( this->color, color, sizeof(float)*4 );
 	memcpy( tex0, tex_coords, sizeof(tex_coords) );
-    memset( normal, 0, sizeof(float)*3 );
-    memset( tex1,	0, sizeof(float)*2 );
-    memset( tex2,	0, sizeof(float)*2 );
+	memset( normal, 0, sizeof(float)*3 );
+	memset( tex1,	0, sizeof(float)*2 );
+	memset( tex2,	0, sizeof(float)*2 );
 }
 

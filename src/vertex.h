@@ -19,12 +19,9 @@ class Vertex
 		float	position[3];
 		float	color	[4];
 		float	tex0	[2];
-		float	normal	[3];
+		float	normal[3];
 		float	tex1	[2];
 		float	tex2	[2];
-		//Texture ID (for tex arrays) / support for other Flags?
-		//Does a object not need a color?
-		//Ability to choose type of Vertex.
 };
 
 inline bool Vertex::operator ==( const Vertex& lhs ) const

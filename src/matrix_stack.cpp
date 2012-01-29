@@ -27,7 +27,7 @@ void Matrix_Stack::save()
 		stack[pointer] = stack[pointer - 1];
 	}
 	else
-		Debug::error( "Matrix stack overflow." );
+		debug() << "Matrix stack overflow.\n";
 }
 
 void Matrix_Stack::restore()
@@ -35,7 +35,7 @@ void Matrix_Stack::restore()
 	if( pointer > 0 )
 		pointer--;
 	else
-		Debug::error( "Matrix stack underflow." );
+		debug() << "Matrix stack underflow.\n";
 }
 
 void Matrix_Stack::modify( const glm::mat4& m )

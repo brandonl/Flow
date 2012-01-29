@@ -1,17 +1,14 @@
 #include "mesh.h"
-#include "gl_renderer.h"
-#include "asset_manager.h"
 #include "debug.h"
 #include <string>
+#include <fstream>
 
-std::string Mesh::working_directory = "../../Content/Models/";
+std::string Mesh::working_directory = "../../content/models/";
 
 Mesh::Mesh( Mesh_Type mtype )
 	:	mesh_type(mtype),
 		poly_mode(FILL),
 		is_indexed(false),
-		vbo_position(0),
-		ibo_position(0),
 		max_index(0),
 		min_index(4294967295),
 		data_is_dirty(false)
@@ -69,11 +66,7 @@ void Mesh::import_obj( const std::string& filename )
 	// Clear mesh information if reusing this object since it will cause 
 	// problems with buffer object drawing.
 	if( data_is_dirty )
-	{
-		vertices.clear();
-		polys.clear();
-		indexes.clear();
-	}
+		reset();
 
 	mesh_type = TRI_MESH;
 	poly_mode = FILL;
@@ -84,7 +77,7 @@ void Mesh::import_obj( const std::string& filename )
 
 	if( !in.is_open() )
 	{
-		Debug::error( "Mesh::load_obj: Failed to open object file with name " + filename );
+		debug() <<"Mesh::load_obj: Failed to open object file with name " << filename << std::endl;
 		return;
 	}
 
@@ -135,35 +128,35 @@ void Mesh::import_obj( const std::string& filename )
 		// Extract the face data (indexes)
 		/////////////////////////////////////////////////////////////
 		else if( tok == "f" ) // vind/tind/nind
-        {
-            std::string face_tok;
+		{
+			std::string face_tok;
 			polygon = Polygon();
 
-            while( ss >> face_tok ) 
+			while( ss >> face_tok ) 
 			{
 				vertex = Vertex();
 
 				//Convert line to stringstream for str to int conversion.
-                std::stringstream ss2;
-                ss2 << face_tok;
+        std::stringstream ss2;
+        ss2 << face_tok;
 
 				// Grab vertex index.
-                ss2 >> ival;
+        ss2 >> ival;
 				vertex.position[0] = verts[ (( ival - 1 )*3) ];
 				vertex.position[1] = verts[ (( ival - 1 )*3) + 1 ];
 				vertex.position[2] = verts[ (( ival - 1 )*3) + 2 ];
 
-                if( ss2 && ss2.peek() == '/' ) 
-                {
-                    ss2 >> cval;
+        if( ss2 && ss2.peek() == '/' ) 
+        {
+					ss2 >> cval;
 
-                    // Grab texture indexes
-                    if( ss2.peek() != '/' ) 
-                    {
-                        ss2 >> ival;
+					// Grab texture indexes
+					if( ss2.peek() != '/' ) 
+					{
+							ss2 >> ival;
 						vertex.tex0[0] = tex_coords[ (( ival - 1 )*2) ];
 						vertex.tex0[1] = tex_coords[ (( ival - 1 )*2) + 1 ];
-                    }
+					}
 		
 					// Grab vertex normals indexes (may not be unit)
 					else
@@ -178,14 +171,11 @@ void Mesh::import_obj( const std::string& filename )
 				polygon.add_vertex( vertex );
 			} // End while
 			add_poly( polygon );
-        } // End face line
-    }
+		} // End face line 
+	}
 
-    in.close();
+  in.close();
 	data_is_dirty = true;
-	///////////////////////////////////////////////////////
-	// Send to renderer for vbo addition
-	GL_Renderer::add_dynamic( *this );
 }
 
 //-------------------------------------------------------------------
@@ -196,11 +186,7 @@ void Mesh::build_cube( float r, const Color& col )
 	// Clear mesh information if reusing this object since it will cause 
 	// problems with buffer object drawing.
 	if( data_is_dirty )
-	{
-		vertices.clear();
-		polys.clear();
-		indexes.clear();
-	}
+		reset();
 
 	mesh_type = TRI_MESH;
 	poly_mode = FILL;
@@ -291,10 +277,6 @@ void Mesh::build_cube( float r, const Color& col )
 	add_poly( polygon );
 	
 	data_is_dirty = true;
-
-	///////////////////////////////////////////////////////
-	// Send to renderer for vbo addition
-	GL_Renderer::add_dynamic( *this );
 }	
 
 void Mesh::build_sphere( float r, int lats, int longs, const Color& col )
@@ -302,11 +284,7 @@ void Mesh::build_sphere( float r, int lats, int longs, const Color& col )
 	// Clear mesh information if reusing this object since it will cause 
 	// problems with buffer object drawing.
 	if( data_is_dirty )
-	{
-		vertices.clear();
-		polys.clear();
-		indexes.clear();
-	}
+		reset();
 
 	mesh_type = TRI_MESH;
 	poly_mode = FILL;
@@ -381,10 +359,6 @@ void Mesh::build_sphere( float r, int lats, int longs, const Color& col )
 	}
 	
 	data_is_dirty = true;
-
-	///////////////////////////////////////////////////////
-	// Send to renderer for vbo addition
-	GL_Renderer::add_dynamic( *this );
 }
 
 void Mesh::build_torus( float outer_radius, float inner_radius, int num_major, int num_minor, const Color& col )
@@ -392,11 +366,7 @@ void Mesh::build_torus( float outer_radius, float inner_radius, int num_major, i
 	// Clear mesh information if reusing this object since it will cause 
 	// problems with buffer object drawing.
 	if( data_is_dirty )
-	{
-		vertices.clear();
-		polys.clear();
-		indexes.clear();
-	}
+		reset();
 
 	mesh_type = TRI_MESH;
 	poly_mode = FILL;
@@ -471,144 +441,6 @@ void Mesh::build_torus( float outer_radius, float inner_radius, int num_major, i
 	}
 
 	data_is_dirty = true;
-
-	///////////////////////////////////////////////////////
-	// Send to renderer for vbo addition
-	GL_Renderer::add_dynamic( *this );
-}
-
-void Mesh::build_cylinder( float base_radius, float top_radius, float length, int longs, int lats, const Color& col )
-{
-	// Clear mesh information if reusing this object since it will cause 
-	// problems with buffer object drawing.
-	if( data_is_dirty )
-	{
-		vertices.clear();
-		polys.clear();
-		indexes.clear();
-	}
-
-	mesh_type = TRI_MESH;
-	poly_mode = FILL;
-	is_indexed = true;
-
-	float step = ( top_radius - base_radius ) / float(lats);
-	float step_size_lateral = ( 3.1415926536f * 2.0f ) / float(longs);
-
-    float ds = 1.0f / float(longs);
-	float dt = 1.0f / float(lats);
-	float s;
-	float t;
-	float vx, vy, vz;
-	Polygon polygon;
-	Vertex v0, v1, v2, v3;
-
-	for( int i = 0; i < lats; ++i ) 
-	{
-		if( i == 0 )			
-			t = 0.0f;
-		else
-			t = float(i) * dt;
-
-		float t_next;
-		if( i == ( lats - 1 ) )
-			t_next = 1.0f;
-		else
-			t_next = float( i+1 ) * dt;
-	
-		float curr_radius = base_radius + ( step * float(i) );
-		float next_radius = base_radius + ( step * float(i + 1) );
-		float theta;
-		float theta_next;
-
-		float curr_z = float(i) * (length / float(lats)); 
-		float next_z = float(i+1) * (length / float(lats));
-		
-		float z_normal = 0.0f;
-		if( ! ( fabs( ( base_radius - top_radius ) - 0.0f ) < 0.00001f ) )
-		{
-			// Rise over run...
-			z_normal = (base_radius - top_radius);
-		}
-		
-		for( int j = 0; j < longs; ++j ) 
-		{		
-			if(j == 0)
-				s = 0.0f;
-			else
-				s = float(j) * ds;
-
-			float s_next;
-			if(j == (longs -1))
-				s_next = 1.0f;
-			else
-				s_next = float(j+1) * ds;
-
-			theta = step_size_lateral * float(j);
-			if(j == (longs - 1))
-				theta_next = 0.0f;
-			else
-				theta_next = step_size_lateral * (float(j+1));
-
-			///////////////////////////////////////////////////////////////////
-			// Inner First
-			vx = cos(theta) * curr_radius;	
-			vy = sin(theta) * curr_radius;	
-			vz = curr_z;						
-			v1 = Vertex( vx, vy, vz, s, t, vx, vy, z_normal, col );
-
-			///////////////////////////////////////////////////////////////////
-			// Outer First
-			vx = cos(theta) * next_radius;	
-			vy = sin(theta) * next_radius;	
-			vz = next_z;						
-			
-			if( !( fabs( next_radius - 0.0f ) < 0.00001f ) ) 
-				v0 = Vertex( vx, vy, vz, s, t_next, vx, vy, z_normal, col );
-
-			else
-				v0 = Vertex( vx, vy, vz, s, t_next, v1.normal[0], v1.normal[1], v1.normal[2], col );
-		
-			///////////////////////////////////////////////////////////////////
-			// Inner second
-			vx = cos(theta_next) * curr_radius;	
-			vy = sin(theta_next) * curr_radius;	
-			vz = curr_z;			
-
-			v3 = Vertex( vx, vy, vz, s_next, t, vx, vy, z_normal, col );
-
-			///////////////////////////////////////////////////////////////////
-			// Outer second
-			vx = cos(theta_next) * next_radius;	
-			vy = sin(theta_next) * next_radius;
-			vz = next_z;					
-			
-			if( !( fabs( next_radius - 0.0f ) < 0.00001f ) )
-				v2 = Vertex( vx, vy, vz, s_next, t, vx, vy, z_normal, col );
-			else
-				v2 = Vertex( vx, vy, vz, s_next, t_next, v3.normal[0], v3.normal[1], v3.normal[2], col );
-		
-			polygon = Polygon();
-			polygon.add_vertex( v0 );
-			polygon.add_vertex( v1 );
-			polygon.add_vertex( v2 );
-			add_poly( polygon );
-
-			/////////////////////////////////////////////////////////
-			// Rearrange and and as next poly...
-			polygon = Polygon();
-			polygon.add_vertex( v1 );
-			polygon.add_vertex( v3 );
-			polygon.add_vertex( v2 );
-			add_poly( polygon );			
-		}
-	}
-
-	data_is_dirty = true;
-
-	///////////////////////////////////////////////////////
-	// Send to renderer for vbo addition
-	GL_Renderer::add_dynamic( *this );
 }
 
 void Mesh::build_bbox( const glm::vec3& min, const glm::vec3& max, const Color& col )
@@ -616,11 +448,7 @@ void Mesh::build_bbox( const glm::vec3& min, const glm::vec3& max, const Color& 
 	// Clear mesh information if reusing this object since it will cause 
 	// problems with buffer object drawing.
 	if( data_is_dirty )
-	{
-		vertices.clear();
-		polys.clear();
-		indexes.clear();
-	}
+		reset();
 
 	mesh_type = LINE_STRIP_MESH;
 	poly_mode = LINES;
@@ -655,10 +483,6 @@ void Mesh::build_bbox( const glm::vec3& min, const glm::vec3& max, const Color& 
 	add_poly( polygon );
 
 	data_is_dirty = true;
-
-	///////////////////////////////////////////////////////
-	// Send to renderer for vbo addition
-	GL_Renderer::add_dynamic( *this );
 }
 
 
@@ -688,16 +512,6 @@ const unsigned int Mesh::get_poly_count() const
 	return polys.size();
 }
 
-const unsigned int Mesh::get_vbo_pos() const
-{
-	return vbo_position;
-}
-
-const unsigned int Mesh::get_ibo_pos() const
-{
-	return ibo_position;
-}
-
 const unsigned int Mesh::get_max_index() const
 {
 	return max_index;
@@ -708,33 +522,14 @@ const unsigned int Mesh::get_min_index() const
 	return min_index;
 }
 
-const unsigned int Mesh::get_buffer_particpation() const
-{
-	return buffer_particpation;
-}
-
 /////////////////////////////////////////////////////////////////////
-void Mesh::set_ibo_pos( unsigned int ibo_pos )
-{
-	ibo_position = ibo_pos;
-}
-
-void Mesh::set_vbo_pos( unsigned int vbo_pos )
-{
-	vbo_position = vbo_pos;
-}
 
 void Mesh::set_working_dir( const std::string& directory )
 {
 	working_directory = directory;
 }
 
-void Mesh::set_buffer_particpation( unsigned int buffer_object )
-{
-	buffer_particpation = buffer_object;
-}
-
-void Mesh::reset_mesh()
+void Mesh::reset()
 {
 	vertices.clear();
 	polys.clear();

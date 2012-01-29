@@ -4,25 +4,23 @@
 #include <iostream>
 #include "input.h"
 
-using namespace slge;
+Window *Window::instance = NULL;
 
-window *window::instance = NULL;
-
-window::window()
+Window::Window()
 {
 	if( instance != NULL )
-		std::cerr << "Only one window may be active at a time."<< std::endl;
+		std::cerr << "Only one Window may be active at a time."<< std::endl;
 
 	instance = this;
 }
 
-window::~window()
+Window::~Window()
 {
 	glfwCloseWindow();
 	glfwTerminate();
 }
 
-void window::init( const std::string& ntitle, int w, int h, int cdepth, int zdepth )
+void Window::init( const std::string& ntitle, int w, int h, int cdepth, int zdepth )
 {
 	title = ntitle;
 	width = w;
@@ -73,7 +71,7 @@ void window::init( const std::string& ntitle, int w, int h, int cdepth, int zdep
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 }
 
-void window::update()
+void Window::update()
 {
 	int last_width = instance->width;
 	int last_height = instance->height;
@@ -86,47 +84,47 @@ void window::update()
 	glfwPollEvents();
 }
 
-void window::clear()
+void Window::clear()
 {
 	glClear( GL_COLOR_BUFFER_BIT );
 }
 
-void window::swap_buffers()
+void Window::swap_buffers()
 {
 	glfwSwapBuffers();
 }
 
-bool window::is_open()
+bool Window::is_open()
 {
 	return ( glfwGetWindowParam( GLFW_OPENED ) == 0 ? false : true );
 }
 
-int window::get_width()
+int Window::get_width()
 {
 	return instance->width;
 }
 
-int window::get_height()
+int Window::get_height()
 {
 	return instance->height;
 }
 
-float window::get_aspect_ratio()
+float Window::get_aspect_ratio()
 {
 	return instance->ratio;
 }
 
-double window::tick()
+double Window::tick()
 {
 	return glfwGetTime();
 }
 
-void window::set_title( const std::string& ntitle )
+void Window::set_title( const std::string& ntitle )
 {
 	glfwSetWindowTitle( ntitle.c_str() );
 }
 
-void window::center()
+void Window::center()
 {
 	int *display_size = instance->display_size();
 
@@ -134,7 +132,7 @@ void window::center()
 	glfwSetWindowPos( ( display_size[0] - instance->width ) / 2, ( display_size[1] - instance->height ) / 2 );
 }
 
-int *window::display_size()
+int *Window::display_size()
 {
 	GLFWvidmode desktop_resolution;
 	glfwGetDesktopMode( &desktop_resolution );
@@ -142,17 +140,17 @@ int *window::display_size()
 	return display_size;
 }
 
-void window::key_event_callback( int key, int action )
+void Window::key_event_callback( int key, int action )
 {
-	input::key_event( key, action );
+	Input::key_event( key, action );
 }
 
-void window::mouse_position_callBack( int x, int y )
+void Window::mouse_position_callBack( int x, int y )
 {
-	input::mouse_move_event( x, y );
+	Input::mouse_move_event( x, y );
 }
 
-void window::mouse_button_callback( int button, int action )
+void Window::mouse_button_callback( int button, int action )
 {
-	input::mouse_down_event( button, action );
+	Input::mouse_down_event( button, action );
 }
