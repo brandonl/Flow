@@ -1,0 +1,11 @@
+*.swp
+
+/*.vcxproj.user
+/*.suo
+/*.sdf
+/*.opensdf
+/ipch
+/Debug
+/Release
+/bin
+/obj
