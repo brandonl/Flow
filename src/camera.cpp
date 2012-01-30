@@ -1,9 +1,17 @@
 #include "camera.h"
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include "input.h"
+#include "window.h"
 
 Camera::Camera()
 {
+	CAM_UP		=	0.11f;        
+	CAM_DOWN	=	-0.11f;     
+	CAM_LEFT	=	 0.05f;         
+	CAM_RIGHT	=	-0.05f;          
+	STRAFE_LEFT	=	-0.05f;
+	STRAFE_RIGHT=	0.05f;
 }
 
 Camera::~Camera()
@@ -15,6 +23,31 @@ void Camera::set( const glm::vec3&  p, const glm::vec3&  v, const glm::vec3&  u 
 	position = p;
 	focus = v;
 	up_direction = u;
+}
+
+void Camera::update()
+{
+	glm::vec2 mp = Input::get_mouse_position();
+	Input::set_mouse_position(  Window::get_width() >> 1, Window::get_height() >> 1 );
+	rotate( mp, Window::get_width() >> 1, Window::get_height() >> 1 );
+
+	if( Input::is_key_held( 'W' ) ) 
+		move( CAM_UP );
+
+	if( Input::is_key_held( 'S' ) ) 
+		move( CAM_DOWN );
+
+	if( Input::is_key_held( 'A' ) )
+		rotate( CAM_LEFT, glm::vec3( 0.0f, 1.0f, 0.0f ) ); 
+
+	if( Input::is_key_held('D' ) )
+		rotate( CAM_RIGHT, glm::vec3( 0.0f, 1.0f, 0.0f ) );
+
+	if( Input::is_key_held( 'Q' ) )
+		strafe( STRAFE_LEFT ); 
+
+	if( Input::is_key_held( 'E' ) )
+		strafe( STRAFE_RIGHT );
 }
 
 void Camera::update( const glm::vec3& direction, float dir )

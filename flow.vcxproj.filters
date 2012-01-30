@@ -33,9 +33,6 @@
     <ClInclude Include="src\polygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\transform_pipeline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +49,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\buffer_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shapes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,9 +80,6 @@
     <ClCompile Include="src\polygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\transform_pipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\buffer_object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

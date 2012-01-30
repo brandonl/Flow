@@ -15,12 +15,9 @@ class Matrix_Stack
 
 		void scale( float, float, float );
 		void translate( float, float, float );
-
 		void rotate( float, float, float, float );
-		void rotate_about_x( float angle );
-		void rotate_about_y( float angle );
-		void rotate_about_z( float angle );
-
+		
+		void set( const glm::mat4& m );
 		const glm::mat4& get_matrix();
 
 	private:

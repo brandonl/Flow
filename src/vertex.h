@@ -6,8 +6,6 @@
 class Vertex
 {
 	public:
-		void print() const;
-
 		Vertex();
 		Vertex( float x, float y, float z, const Color& col = Color() );
 		Vertex( float x, float y, float z, float u, float v, float normx, float normy, float normz, const Color& col = Color() );

@@ -2,6 +2,8 @@
 #define WINDOW_H
 
 #include <string>
+#define GLFW_NO_GLU
+#include <GL/glfw.h>
 
 class Window
 {

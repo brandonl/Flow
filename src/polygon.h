@@ -14,17 +14,17 @@ class Polygon
 		/////////////////////////////////////////////////////////////
 		void			add_vertex( Vertex vertex );
 		void			add_vertex( float x, float y, float z, float u, float v, 
-									float normx, float normy, float normz, const Color& col = Color() );
+													float normx, float normy, float normz, const Color& col = Color() );
 		void			add_vertex( float x, float y, float z, float u, float v );
 		void			add_vertex( float x, float y, float z, const Color& col );
 
 		glm::vec3		calculate_normal() const;
 
-		void			set_normal( const glm::vec3& norm );
+		void				set_normal( const glm::vec3& norm );
 
 		std::vector<Vertex>	get_vertices() const;
-		glm::vec3			get_normal() const;
-		Vertex				get_vertex( unsigned int index ) const;
+		glm::vec3						get_normal() const;
+		Vertex							get_vertex( unsigned int index ) const;
 
 
 

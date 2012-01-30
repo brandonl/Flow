@@ -1,5 +1,3 @@
-#define GLFW_NO_GLU
-#include <GL/glfw.h>
 #include "window.h"
 #include <iostream>
 #include "input.h"
@@ -51,24 +49,9 @@ void Window::init( const std::string& ntitle, int w, int h, int cdepth, int zdep
 	if( height == 0 )
 		height = 1;
 
-	glViewport( 0, 0, width, height );
-
 	glfwSetKeyCallback( key_event_callback );
 	glfwSetMouseButtonCallback( mouse_button_callback );
 	glfwSetMousePosCallback( mouse_position_callBack );
-	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	glOrtho(0.0f, width, height, 0.0f, -1.0, 1.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glEnable( GL_TEXTURE_2D );
-	glClearColor( 0.2f, 0.2f, 0.2f, 1.0f );
-
-	glDisable( GL_DEPTH_TEST );
-	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 }
 
 void Window::update()
@@ -86,7 +69,7 @@ void Window::update()
 
 void Window::clear()
 {
-	glClear( GL_COLOR_BUFFER_BIT );
+	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
 void Window::swap_buffers()

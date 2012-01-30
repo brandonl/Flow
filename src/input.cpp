@@ -101,3 +101,9 @@ glm::vec2 Input::get_mouse_percentage()
 					instance->mouse_position.y / Window::get_height() );
 }
 
+void Input::set_mouse_position( int x, int y )
+{
+	glfwSetMousePos( x, y );
+	instance->mouse_position = glm::vec2( x, y );
+}
+

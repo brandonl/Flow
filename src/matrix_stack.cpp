@@ -59,6 +59,11 @@ void Matrix_Stack::rotate( float theta, float x, float y, float z )
 	glm::rotate( stack[pointer], theta, glm::vec3( x, y, z ) );
 }
 
+void Matrix_Stack::set( const glm::mat4& m )
+{
+	stack[pointer] = m;
+}
+
 const glm::mat4& Matrix_Stack::get_matrix()
 {
 	return stack[pointer];

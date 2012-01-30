@@ -45,6 +45,8 @@ class Input
 		//! \brief Return the x and y percentage of the mouse position 0.0 - 1.0
 		static glm::vec2 get_mouse_percentage();
 
+		static void set_mouse_position( int x, int y );
+
 	private:
 		static Input *instance;
 

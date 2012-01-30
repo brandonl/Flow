@@ -82,21 +82,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\app.h" />
+    <ClInclude Include="src\buffer_object.h" />
     <ClInclude Include="src\camera.h" />
     <ClInclude Include="src\color.h" />
     <ClInclude Include="src\debug.h" />
+    <ClInclude Include="src\obj_loader.h" />
     <ClInclude Include="src\scene.h" />
     <ClInclude Include="src\shader.h" />
     <ClInclude Include="src\input.h" />
     <ClInclude Include="src\matrix_stack.h" />
     <ClInclude Include="src\mesh.h" />
     <ClInclude Include="src\polygon.h" />
-    <ClInclude Include="src\transform_pipeline.h" />
+    <ClInclude Include="src\shapes.h" />
     <ClInclude Include="src\vertex.h" />
     <ClInclude Include="src\window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\buffer_object.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\color.cpp" />
     <ClCompile Include="src\scene.cpp" />
@@ -106,7 +109,6 @@
     <ClCompile Include="src\matrix_stack.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\polygon.cpp" />
-    <ClCompile Include="src\transform_pipeline.cpp" />
     <ClCompile Include="src\vertex.cpp" />
     <ClCompile Include="src\window.cpp" />
   </ItemGroup>

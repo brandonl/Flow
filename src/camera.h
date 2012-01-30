@@ -10,6 +10,7 @@ class Camera
 		~Camera();
 
 		void set( const glm::vec3& p, const glm::vec3& v, const glm::vec3& u );
+		void update();
 		void update( const glm::vec3& direction, float dir );
 
 		void move( float direction );
@@ -24,6 +25,14 @@ class Camera
 		glm::vec3 up_direction;
 		glm::vec3 strafe_direction;
 		float last_rotation_angle;
+
+	private:
+		float CAM_UP;
+		float CAM_DOWN;
+		float CAM_LEFT;
+		float CAM_RIGHT;
+		float STRAFE_LEFT;
+		float STRAFE_RIGHT;
 };
 
 #endif
