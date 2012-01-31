@@ -1,13 +1,9 @@
 #ifndef APP_H
 #define APP_H
 
-#if defined(_MSC_VER)&&(_MSC_VER>=1200)
-#pragma once
-#endif
-
 #include "window.h"
 #include "input.h"
-#include "scene.h"
+#include "../scene.h"
 #include <string>
 
 class App

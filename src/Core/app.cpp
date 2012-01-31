@@ -1,10 +1,11 @@
 #include "app.h"
 #include <iostream>
 #include <sstream>
+#include "../scene.h"
 
 const float App::DELTA_TIME = 1.0f/60.0f;
 
-App::App() : running(true)
+App::App() : scene(0), running(true)
 {
 }
 

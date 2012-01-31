@@ -1,14 +1,8 @@
-#ifndef PRIM_SHAPES_H__
-#define PRIM_SHAPES_H__
-
-#include "mesh.h"
+#include "shapes.h"
 
 namespace shape
 {
-	//-------------------------------------------------------------------
-	// Primitives code based off of source code from OpenGL SuperBible 5ed.
-	/////////////////////////////////////////////////////////////////////
-	void build_cube( float r, Mesh &mesh, const Color& col = Color() )
+	void build_cube( float r, Mesh &mesh, const Color& col )
 	{
 		// Clear mesh information if reusing this object since it will cause 
 		// problems with buffer object drawing.
@@ -104,7 +98,7 @@ namespace shape
 		mesh.add_poly( polygon );
 	}	
 
-	void build_sphere( float r, int lats, int longs, Mesh &mesh, const Color& col = Color() )
+	void build_sphere( float r, int lats, int longs, Mesh &mesh, const Color& col )
 	{
 		if( !mesh.get_vertex_count() )
 			mesh.reset();
@@ -182,7 +176,7 @@ namespace shape
 		}
 	}
 
-	void build_torus( float outer_radius, float inner_radius, int num_major, int num_minor, Mesh &mesh, const Color& col = Color() )
+	void build_torus( float outer_radius, float inner_radius, int num_major, int num_minor, Mesh &mesh, const Color& col )
 	{
 		if( !mesh.get_vertex_count() )
 			mesh.reset();
@@ -260,7 +254,7 @@ namespace shape
 		}
 	}
 
-	void build_bbox( const glm::vec3& min, const glm::vec3& max, Mesh &mesh, const Color& col = Color() )
+		void build_bbox( const glm::vec3& min, const glm::vec3& max, Mesh &mesh, const Color& col )
 	{
 		if( !mesh.get_vertex_count() )
 			mesh.reset();
@@ -298,5 +292,3 @@ namespace shape
 		mesh.add_poly( polygon );
 	}
 };
-
-#endif

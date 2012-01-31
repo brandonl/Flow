@@ -81,36 +81,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\app.h" />
-    <ClInclude Include="src\buffer_object.h" />
-    <ClInclude Include="src\camera.h" />
-    <ClInclude Include="src\color.h" />
-    <ClInclude Include="src\debug.h" />
+    <ClInclude Include="src\Core\app.h" />
+    <ClInclude Include="src\Core\buffer_object.h" />
+    <ClInclude Include="src\Core\camera.h" />
+    <ClInclude Include="src\Core\color.h" />
+    <ClInclude Include="src\Core\debug.h" />
+    <ClInclude Include="src\Core\input.h" />
+    <ClInclude Include="src\Core\matrix_stack.h" />
+    <ClInclude Include="src\Core\mesh.h" />
+    <ClInclude Include="src\Core\polygon.h" />
+    <ClInclude Include="src\Core\shader.h" />
+    <ClInclude Include="src\Core\shapes.h" />
+    <ClInclude Include="src\Core\texture.h" />
+    <ClInclude Include="src\Core\vertex.h" />
+    <ClInclude Include="src\Core\window.h" />
     <ClInclude Include="src\obj_loader.h" />
+    <ClInclude Include="src\opening.h" />
     <ClInclude Include="src\scene.h" />
-    <ClInclude Include="src\shader.h" />
-    <ClInclude Include="src\input.h" />
-    <ClInclude Include="src\matrix_stack.h" />
-    <ClInclude Include="src\mesh.h" />
-    <ClInclude Include="src\polygon.h" />
-    <ClInclude Include="src\shapes.h" />
-    <ClInclude Include="src\vertex.h" />
-    <ClInclude Include="src\window.h" />
+    <ClInclude Include="src\text2d.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\app.cpp" />
-    <ClCompile Include="src\buffer_object.cpp" />
-    <ClCompile Include="src\camera.cpp" />
-    <ClCompile Include="src\color.cpp" />
+    <ClCompile Include="src\Core\app.cpp" />
+    <ClCompile Include="src\Core\buffer_object.cpp" />
+    <ClCompile Include="src\Core\camera.cpp" />
+    <ClCompile Include="src\Core\color.cpp" />
+    <ClCompile Include="src\Core\input.cpp" />
+    <ClCompile Include="src\Core\matrix_stack.cpp" />
+    <ClCompile Include="src\Core\mesh.cpp" />
+    <ClCompile Include="src\Core\polygon.cpp" />
+    <ClCompile Include="src\Core\shader.cpp" />
+    <ClCompile Include="src\Core\shapes.cpp" />
+    <ClCompile Include="src\Core\texture.cpp" />
+    <ClCompile Include="src\Core\vertex.cpp" />
+    <ClCompile Include="src\Core\window.cpp" />
+    <ClCompile Include="src\opening.cpp" />
     <ClCompile Include="src\scene.cpp" />
-    <ClCompile Include="src\shader.cpp" />
-    <ClCompile Include="src\input.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\matrix_stack.cpp" />
-    <ClCompile Include="src\mesh.cpp" />
-    <ClCompile Include="src\polygon.cpp" />
-    <ClCompile Include="src\vertex.cpp" />
-    <ClCompile Include="src\window.cpp" />
+    <ClCompile Include="src\text2d.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

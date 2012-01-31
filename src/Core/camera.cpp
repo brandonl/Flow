@@ -8,8 +8,8 @@ Camera::Camera()
 {
 	CAM_UP		=	0.11f;        
 	CAM_DOWN	=	-0.11f;     
-	CAM_LEFT	=	 0.05f;         
-	CAM_RIGHT	=	-0.05f;          
+	CAM_LEFT	=	 0.02f;         
+	CAM_RIGHT	=	-0.02f;          
 	STRAFE_LEFT	=	-0.05f;
 	STRAFE_RIGHT=	0.05f;
 }
