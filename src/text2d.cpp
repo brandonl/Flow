@@ -22,8 +22,7 @@ namespace Text
 	void init(const char * texturePath){
 
 		// Initialize texture
-		Texture t;
-		t.load( texturePath, 0 );
+		fontTexture.load( texturePath, 0 );
 
 		glGenVertexArrays( 1, &vao );
 		glBindVertexArray( vao );
@@ -88,6 +87,7 @@ namespace Text
 			UVs.push_back(uv_down_left);
 		}
 
+		glBindVertexArray( vao );
 		glBindBuffer(GL_ARRAY_BUFFER, Text2DVertexBufferID);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec2), &vertices[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, Text2DUVBufferID);
@@ -105,7 +105,6 @@ namespace Text
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glBindVertexArray( vao );
 		// Draw call
 		glDrawArrays(GL_TRIANGLES, 0, vertices.size() );
 
