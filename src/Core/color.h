@@ -1,15 +1,12 @@
 #ifndef __COLOR_H__
 #define __COLOR_H__
 
-#include <sstream>
-#include <string>
-
 class Color
 {
 	public:
 		Color();
 		Color( float r, float g, float b, float a );
-		Color( const std::string &hex_value );
+		Color( const char* hexValue );
 
 		static Color black;
 		static Color orange;

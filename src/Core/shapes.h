@@ -1,8 +1,8 @@
 #ifndef PRIM_SHAPES_H__
 #define PRIM_SHAPES_H__
 
-#include "mesh.h"
-#include "color.h"
+#include "Color.h"
+#include "Mesh.h"
 
 namespace shape
 {

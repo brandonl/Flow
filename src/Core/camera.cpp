@@ -1,8 +1,8 @@
-#include "camera.h"
+#include "Camera.h"
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtc/quaternion.hpp>
-#include "input.h"
-#include "window.h"
+#include "Input.h"
+#include "Window.h"
 
 Camera::Camera()
 {

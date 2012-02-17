@@ -1,8 +1,8 @@
-#include "texture.h"
 #define GLFW_NO_GLU
 #include <GL/glew.h>
 #include <GL/glfw.h>
-#include "debug.h"
+#include "Debug.h"
+#include "Texture.h"
 
 Texture::Texture()
 	: name(0), 
@@ -78,4 +78,14 @@ void Texture::unload()
 unsigned int Texture::get_name() const
 {
 	return name;
+}
+
+void Texture::bind() const
+{
+	glBindTexture( GL_TEXTURE_2D, name );
+}
+
+void Texture::unbind() const
+{
+	glBindTexture( GL_TEXTURE_2D, 0 );
 }

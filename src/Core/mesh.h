@@ -2,65 +2,44 @@
 #define __MESH_H__
 
 #include <GL/glew.h>
-#include "polygon.h"
+#include "Polygon.h"
 
 class Mesh
 {
 	public:
-		typedef std::vector<Vertex>					Vertex_Container;
-		typedef std::vector<unsigned short> Index_Container;
+		typedef std::vector<Vertex>	VertexContainer;
 
-		enum Mesh_Type
-		{
-			TRI_MESH = GL_TRIANGLES,
-			TRI_FAN_MESH = GL_TRIANGLE_FAN,
-			TRI_STRIP_MESH = GL_TRIANGLE_STRIP,
-			LINE_MESH = GL_LINES,
-			LINE_STRIP_MESH = GL_LINE_STRIP,
-			LINE_LOOP_MESH = GL_LINE_LOOP,
-			POINT_MESH = GL_POINTS
-		};
-
-		enum Poly_Mode
-		{
-			FILL = GL_FILL,
-			POINTS = GL_POINT,
-			LINES = GL_LINE
-		};
-
-		Mesh( Mesh_Type type = TRI_MESH );
+		Mesh();
 		~Mesh();
-		void			add_poly( const Polygon& poly );
 
-		//-----------------------------------------------------------
-		// Accesors
-		/////////////////////////////////////////////////////////////
-		const Vertex_Container&	get_vertices() const;
-		const unsigned					get_vertex_count() const;
-		const Index_Container&	get_indexes() const;
-		const unsigned 					get_index_count() const;
-
-		const unsigned 					get_max_index() const;
-		const unsigned 					get_min_index() const;
-
-		//-----------------------------------------------------------
-		// Modifiers
-		/////////////////////////////////////////////////////////////
-		void				reset();
-
-		//-----------------------------------------------------------
-		// Public Member Vars
-		/////////////////////////////////////////////////////////////
-		Mesh_Type			mesh_type;
-		Poly_Mode			poly_mode;
-		bool					is_indexed;
+		void add( const Polygon& poly );
+		const VertexContainer&	vertices() const;
+		const unsigned					vertexCount() const;
+		void vertices( const VertexContainer& v );
+		void reset();
 
 	private:
-		unsigned 						max_index;
-		unsigned 						min_index;
-
-		Vertex_Container	vertices;
-		Index_Container		indexes;
+		VertexContainer	vertices_;
 }; 
+
+inline void Mesh::vertices( const VertexContainer& v )
+{
+	vertices_ = v;
+}
+inline const std::vector<Vertex>& Mesh::vertices() const
+{
+	return vertices_;
+}
+
+inline const unsigned int Mesh::vertexCount() const
+{
+	return vertices_.size();
+}
+
+inline void Mesh::reset()
+{
+	// Completely clear the containers. See GOTW #54
+	VertexContainer().swap( vertices_ );
+}
 
 #endif

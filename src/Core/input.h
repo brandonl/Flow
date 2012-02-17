@@ -2,16 +2,17 @@
 #define INPUT_H
 
 #include <glm/glm.hpp>
+#include "Uncopyable.h"
 
 static const unsigned int MAX_KEYS  = 322;
 static const unsigned int MAX_MOUSE_BUTTONS  = 10;
 //! \class Input
 //! \brief As name suggests: Manages game Input including key evens and mouse events.
 //!
-class Input
+class Input : private Uncopyable
 {
 	public:
-		explicit Input();
+		Input();
 		~Input();
 		void init();
 		static void update();

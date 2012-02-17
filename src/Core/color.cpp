@@ -1,4 +1,5 @@
-#include "color.h"
+#include "Color.h"
+#include <sstream>
 
 Color Color::black	= Color( 0.0f, 0.0f, 0.0f, 1.0f );
 Color Color::grey	= Color( 0.5f, 0.5f, 0.5f, 1.0f );
@@ -21,16 +22,16 @@ Color::Color( float r, float g, float b, float a )
 		a(a)
 {}
 
-Color::Color( const std::string &hex_value )
+Color::Color( const char* hexValue )
 {
-	std::istringstream is( hex_value );
+	std::istringstream is( hexValue );
 
-	unsigned int hexcolor;
+	unsigned hexcolor;
 	is >> std::hex >> hexcolor;
 
-	r = (float)( ( hexcolor >> 16 ) & 0xFF );
-	g = (float)( ( hexcolor >> 8 ) & 0xFF );
-	b = (float)( hexcolor & 0xFF );
+	r = static_cast<float>( ( hexcolor >> 16 ) & 0xFF );
+	g = static_cast<float>( ( hexcolor >> 8 ) & 0xFF );
+	b = static_cast<float>( hexcolor & 0xFF );
 	r /= 255.0f;
 	g /= 255.0f;
 	b /= 255.0f;

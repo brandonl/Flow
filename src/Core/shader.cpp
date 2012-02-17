@@ -1,8 +1,9 @@
 #include <GL/glew.h>
-#include "shader.h"
-#include "debug.h"
+#include "Shader.h"
+#include "Debug.h"
 #include <sstream>
 #include <glm/gtc/type_ptr.hpp>
+#include <algorithm>
 
 Shader::Shader()
 {
@@ -16,7 +17,7 @@ Shader::~Shader()
 
 bool Shader::load( const std::string& prefix )
 {
-	this->filename = prefix;
+	filename = prefix;
 	name = glCreateProgram();
 
 	if( load_source( VERTEX_SHADER ) )
@@ -44,10 +45,8 @@ bool Shader::load( const std::string& prefix )
 	// and deletion will not occur until glDetachShader is called to 
 	// detach it from all program objects to which it is attached.
 	for( unsigned int i = 0 ; i < 3; ++i )
-	{
 		if(  shaders[i] != -1 )
 			glDetachShader( name, shaders[i] );
-	}
 
 	return true;
 }
@@ -92,7 +91,7 @@ bool Shader::load_source( Shader_Type type )
 			if( qualifier == "uniform" )
 			{
 				ss >> var_type >> uniform_name;
-				uniform_name.erase( uniform_name.size() - 1, 1 );
+				uniform_name.erase( std::remove( uniform_name.begin(), uniform_name.end(), ';' ), uniform_name.end() );
 				uniform_loc_map[ uniform_name ] = -1;
 			}
 

@@ -5,8 +5,9 @@
 #include <iostream>
 #include <map>
 #include <glm/glm.hpp>
+#include "Uncopyable.h"
 
-class Shader
+class Shader : private Uncopyable
 {
 	public:
 		enum Shader_Type
@@ -47,6 +48,15 @@ class Shader
 		// A c c e s s o r s
 		///////////////////////////////////////////////////////////////////
 		const unsigned int get_name() const;
+		void use() const
+		{
+			glUseProgram( name );
+		}
+
+		void detach() const
+		{
+			glUseProgram(0);
+		}
 
 	private:
 		bool load_source( Shader_Type type );

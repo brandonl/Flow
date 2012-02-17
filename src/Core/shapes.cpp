@@ -1,4 +1,4 @@
-#include "shapes.h"
+#include "Shapes.h"
 
 namespace shape
 {
@@ -6,106 +6,98 @@ namespace shape
 	{
 		// Clear mesh information if reusing this object since it will cause 
 		// problems with buffer object drawing.
-		if( !mesh.get_vertex_count() )
+		if( !mesh.vertexCount() )
 			mesh.reset();
-
-		mesh.mesh_type = Mesh::TRI_MESH;
-		mesh.poly_mode = Mesh::FILL;
-		mesh.is_indexed = true; 
 
 			/////////////////////////////////////////////////////////
 			// Top of cube
 		Polygon polygon = Polygon();
-		polygon.add_vertex( r,		r,		r,		r,		r,		0.0f,	r,		0.0f, col );
-		polygon.add_vertex( r,		r,		-r,		r,		0,		0.0f,	r,		0.0f, col );
-		polygon.add_vertex( -r,		r,		-r,		0,		0,		0.0f,	r,		0.0f, col );
-		mesh.add_poly( polygon );
+		polygon.add( r,		r,		r,		r,		r,		0.0f,	r,		0.0f, col );
+		polygon.add( r,		r,		-r,		r,		0,		0.0f,	r,		0.0f, col );
+		polygon.add( -r,		r,		-r,		0,		0,		0.0f,	r,		0.0f, col );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( r,		r,		r,		r,		r,		0.0f,	r,		0.0f, col  );
-		polygon.add_vertex( -r,		r,		-r,		0,		0,		0.0f,	r,		0.0f, col  );
-		polygon.add_vertex( -r,		r,		r,		0,		r,		0.0f,	r,		0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( r,		r,		r,		r,		r,		0.0f,	r,		0.0f, col  );
+		polygon.add( -r,		r,		-r,		0,		0,		0.0f,	r,		0.0f, col  );
+		polygon.add( -r,		r,		r,		0,		r,		0.0f,	r,		0.0f, col  );
+		mesh.add( polygon );
 
 			//////////////////////////////////////////////////////
 			// Bottom of cube
 		polygon = Polygon();
-		polygon.add_vertex( -r,		-r,		-r,		0,		0,		0.0f,	-r,		0.0f, col  );
-		polygon.add_vertex( r,		-r,		-r,		r,		0,		0.0f,	-r,		0.0f, col  );
-		polygon.add_vertex( r,		-r,		r,		r,		r,		0.0f,	-r,		0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( -r,		-r,		-r,		0,		0,		0.0f,	-r,		0.0f, col  );
+		polygon.add( r,		-r,		-r,		r,		0,		0.0f,	-r,		0.0f, col  );
+		polygon.add( r,		-r,		r,		r,		r,		0.0f,	-r,		0.0f, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( -r,		-r,		r,		0,		r,		0.0f,	-r,		0.0f, col  );
-		polygon.add_vertex( -r,		-r,		-r,		0,		0,		0.0f,	-r,		0.0f, col  );
-		polygon.add_vertex( r,		-r,		r,		r,		r,		0.0f,	-r,		0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( -r,		-r,		r,		0,		r,		0.0f,	-r,		0.0f, col  );
+		polygon.add( -r,		-r,		-r,		0,		0,		0.0f,	-r,		0.0f, col  );
+		polygon.add( r,		-r,		r,		r,		r,		0.0f,	-r,		0.0f, col  );
+		mesh.add( polygon );
 
 		//////////////////////////////////////////////////////
 			// Left side of cube
 		polygon = Polygon();
-		polygon.add_vertex( -r,	r,		r,		r,		r,		-r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( -r,	r,		-r,		r,		0,		-r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( -r,	-r,		-r,		0,		0,		-r,		0.0f,	0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( -r,	r,		r,		r,		r,		-r,		0.0f,	0.0f, col  );
+		polygon.add( -r,	r,		-r,		r,		0,		-r,		0.0f,	0.0f, col  );
+		polygon.add( -r,	-r,		-r,		0,		0,		-r,		0.0f,	0.0f, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( -r,	r,		r,		r,		r,		-r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( -r,	-r,		-r,		0,		0,		-r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( -r,	-r,		r,		0,		r,		-r,		0.0f,	0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( -r,	r,		r,		r,		r,		-r,		0.0f,	0.0f, col  );
+		polygon.add( -r,	-r,		-r,		0,		0,		-r,		0.0f,	0.0f, col  );
+		polygon.add( -r,	-r,		r,		0,		r,		-r,		0.0f,	0.0f, col  );
+		mesh.add( polygon );
 
 		/////////////////////////////////////////////////////
 			// Right side of cube
 		polygon = Polygon();
-		polygon.add_vertex( r,		-r,		-r,		0,		0,		r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( r,		r,		-r,		r,		0,		r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( r,		r,		r,		r,		r,		r,		0.0f,	0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( r,		-r,		-r,		0,		0,		r,		0.0f,	0.0f, col  );
+		polygon.add( r,		r,		-r,		r,		0,		r,		0.0f,	0.0f, col  );
+		polygon.add( r,		r,		r,		r,		r,		r,		0.0f,	0.0f, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( r,		r,		r,		r,		r,		r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( r,		-r,		r,		0,		r,		r,		0.0f,	0.0f, col  );
-		polygon.add_vertex( r,		-r,		-r,		0,		0,		r,		0.0f,	0.0f, col  );
-		mesh.add_poly( polygon );
+		polygon.add( r,		r,		r,		r,		r,		r,		0.0f,	0.0f, col  );
+		polygon.add( r,		-r,		r,		0,		r,		r,		0.0f,	0.0f, col  );
+		polygon.add( r,		-r,		-r,		0,		0,		r,		0.0f,	0.0f, col  );
+		mesh.add( polygon );
 
 		//////////////////////////////////////////////////////
 			// Front side of cube
 		polygon = Polygon();
-		polygon.add_vertex( r,		-r,		r,		r,		0,		0.0f,	0.0f,	r, col  );
-		polygon.add_vertex( r,		r,		r,		r,		r,		0.0f,	0.0f,	r, col  );
-		polygon.add_vertex( -r,		r,		r,		0,		r,		0.0f,	0.0f,	r, col  );
-		mesh.add_poly( polygon );
+		polygon.add( r,		-r,		r,		r,		0,		0.0f,	0.0f,	r, col  );
+		polygon.add( r,		r,		r,		r,		r,		0.0f,	0.0f,	r, col  );
+		polygon.add( -r,		r,		r,		0,		r,		0.0f,	0.0f,	r, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( -r,		r,		r,		0,		r,		0.0f,	0.0f,	r, col  );
-		polygon.add_vertex( -r,		-r,		r,		0,		0,		0.0f,	0.0f,	r, col  );
-		polygon.add_vertex( r,		-r,		r,		r,		0,		0.0f,	0.0f,	r, col  );
-		mesh.add_poly( polygon );
+		polygon.add( -r,		r,		r,		0,		r,		0.0f,	0.0f,	r, col  );
+		polygon.add( -r,		-r,		r,		0,		0,		0.0f,	0.0f,	r, col  );
+		polygon.add( r,		-r,		r,		r,		0,		0.0f,	0.0f,	r, col  );
+		mesh.add( polygon );
 
 		////////////////////////////////////////////////////
 			// Back side of cube
 		polygon = Polygon();
-		polygon.add_vertex( r,		-r,		-r,		r,		0,		0.0f,	0.0f,	-r, col  );
-		polygon.add_vertex( -r,		-r,		-r,		0,		0,		0.0f,	0.0f,	-r, col  );
-		polygon.add_vertex( -r,		r,		-r,		0,		r,		0.0f,	0.0f,	-r, col  );
-		mesh.add_poly( polygon );
+		polygon.add( r,		-r,		-r,		r,		0,		0.0f,	0.0f,	-r, col  );
+		polygon.add( -r,		-r,		-r,		0,		0,		0.0f,	0.0f,	-r, col  );
+		polygon.add( -r,		r,		-r,		0,		r,		0.0f,	0.0f,	-r, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( -r,		r,		-r,		0,		r,		0.0f,	0.0f,	-r, col  );
-		polygon.add_vertex( r,		r,		-r,		r,		r,		0.0f,	0.0f,	-r, col  );
-		polygon.add_vertex( r,		-r,		-r,		r,		0,		0.0f,	0.0f,	-r, col  );
-		mesh.add_poly( polygon );
+		polygon.add( -r,		r,		-r,		0,		r,		0.0f,	0.0f,	-r, col  );
+		polygon.add( r,		r,		-r,		r,		r,		0.0f,	0.0f,	-r, col  );
+		polygon.add( r,		-r,		-r,		r,		0,		0.0f,	0.0f,	-r, col  );
+		mesh.add( polygon );
 	}	
 
 	void build_sphere( float r, int lats, int longs, Mesh &mesh, const Color& col )
 	{
-		if( !mesh.get_vertex_count() )
+		if( !mesh.vertexCount() )
 			mesh.reset();
-
-		mesh.mesh_type = Mesh::TRI_MESH;
-		mesh.poly_mode = Mesh::FILL;
-		mesh.is_indexed = true;
 
 		float drho = (float)(3.141592653589) / (float) longs;
 		float dtheta = 2.0f * (float)(3.141592653589) / (float) lats;
@@ -159,18 +151,18 @@ namespace shape
 				/////////////////////////////////////////////////////////
 			
 				polygon = Polygon();
-				polygon.add_vertex( v0 );
-				polygon.add_vertex( v1 );
-				polygon.add_vertex( v2 );
-				mesh.add_poly( polygon );
+				polygon.add( v0 );
+				polygon.add( v1 );
+				polygon.add( v2 );
+				mesh.add( polygon );
 
 				/////////////////////////////////////////////////////////
 				// Rearrange and and as next poly...
 				polygon = Polygon();
-				polygon.add_vertex( v1 );
-				polygon.add_vertex( v3 );
-				polygon.add_vertex( v2 );
-				mesh.add_poly( polygon );
+				polygon.add( v1 );
+				polygon.add( v3 );
+				polygon.add( v2 );
+				mesh.add( polygon );
 			}
 			t -= dt;
 		}
@@ -178,12 +170,8 @@ namespace shape
 
 	void build_torus( float outer_radius, float inner_radius, int num_major, int num_minor, Mesh &mesh, const Color& col )
 	{
-		if( !mesh.get_vertex_count() )
+		if( !mesh.vertexCount() )
 			mesh.reset();
-
-		mesh.mesh_type = Mesh::TRI_MESH;
-		mesh.poly_mode = Mesh::FILL;
-		mesh.is_indexed = true;
 
 		double major_step = 2.0f * 3.141592653589 / num_major;
 		double minor_step = 2.0f * 3.141592653589 / num_minor;
@@ -238,57 +226,53 @@ namespace shape
 				v3 = Vertex( x1*r,	y1*r,	z,	s,		t,		x1*c,	y1*c,	z/inner_radius, col );
 
 				polygon = Polygon();
-				polygon.add_vertex( v0 );
-				polygon.add_vertex( v1 );
-				polygon.add_vertex( v2 );
-				mesh.add_poly( polygon );
+				polygon.add( v0 );
+				polygon.add( v1 );
+				polygon.add( v2 );
+				mesh.add( polygon );
 
 				/////////////////////////////////////////////////////////
 				// Rearrange and and as next poly...
 				polygon = Polygon();
-				polygon.add_vertex( v1 );
-				polygon.add_vertex( v3 );
-				polygon.add_vertex( v2 );
-				mesh.add_poly( polygon );			
+				polygon.add( v1 );
+				polygon.add( v3 );
+				polygon.add( v2 );
+				mesh.add( polygon );			
 			}
 		}
 	}
 
 		void build_bbox( const glm::vec3& min, const glm::vec3& max, Mesh &mesh, const Color& col )
 	{
-		if( !mesh.get_vertex_count() )
+		if( !mesh.vertexCount() )
 			mesh.reset();
 
-		mesh.mesh_type = Mesh::LINE_STRIP_MESH;
-		mesh.poly_mode = Mesh::LINES;
-		mesh.is_indexed = false; 
-
 		Polygon polygon = Polygon();
-		polygon.add_vertex( min.x, min.y, min.z, col );
-		polygon.add_vertex( max.x, min.y, min.z, col  );
-		polygon.add_vertex( max.x, min.y, max.z, col  ); 
-		polygon.add_vertex( min.x, min.y, max.z, col  );
-		mesh.add_poly( polygon );
+		polygon.add( min.x, min.y, min.z, col );
+		polygon.add( max.x, min.y, min.z, col  );
+		polygon.add( max.x, min.y, max.z, col  ); 
+		polygon.add( min.x, min.y, max.z, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( min.x, min.y, min.z, col  );
-		polygon.add_vertex( min.x, max.y, min.z, col  );
-		polygon.add_vertex( min.x, max.y, max.z, col  );
-		polygon.add_vertex( max.x, max.y, max.z, col  ); 
-		mesh.add_poly( polygon );
+		polygon.add( min.x, min.y, min.z, col  );
+		polygon.add( min.x, max.y, min.z, col  );
+		polygon.add( min.x, max.y, max.z, col  );
+		polygon.add( max.x, max.y, max.z, col  ); 
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( max.x, max.y, min.z, col  );
-		polygon.add_vertex( min.x, max.y, min.z, col  );
-		polygon.add_vertex( min.x, max.y, max.z, col  );
-		polygon.add_vertex( min.x, min.y, max.z, col  );
-		mesh.add_poly( polygon );
+		polygon.add( max.x, max.y, min.z, col  );
+		polygon.add( min.x, max.y, min.z, col  );
+		polygon.add( min.x, max.y, max.z, col  );
+		polygon.add( min.x, min.y, max.z, col  );
+		mesh.add( polygon );
 
 		polygon = Polygon();
-		polygon.add_vertex( max.x, min.y, max.z, col  );
-		polygon.add_vertex( max.x, max.y, max.z, col  );
-		polygon.add_vertex( max.x, max.y, min.z, col  );
-		polygon.add_vertex( max.x, min.y, min.z, col  );
-		mesh.add_poly( polygon );
+		polygon.add( max.x, min.y, max.z, col  );
+		polygon.add( max.x, max.y, max.z, col  );
+		polygon.add( max.x, max.y, min.z, col  );
+		polygon.add( max.x, min.y, min.z, col  );
+		mesh.add( polygon );
 	}
 };

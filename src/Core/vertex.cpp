@@ -1,4 +1,4 @@
-#include "vertex.h"
+#include "Vertex.h"
 #include <cstring>
 #include <iostream>
 
@@ -33,16 +33,6 @@ Vertex::Vertex( float x, float y, float z, float u, float v, float normx, float 
 	normal[0] = normx;
 	normal[1] = normy;
 	normal[2] = normz;
-	memset( tex1,	0, sizeof(float)*2 );
-	memset( tex2,	0, sizeof(float)*2 );
-}
-
-Vertex::Vertex( float *vertices, float *color, float *tex_coords )
-{
-	memcpy( position, vertices, sizeof(vertices) );
-	memcpy( this->color, color, sizeof(float)*4 );
-	memcpy( tex0, tex_coords, sizeof(tex_coords) );
-	memset( normal, 0, sizeof(float)*3 );
 	memset( tex1,	0, sizeof(float)*2 );
 	memset( tex2,	0, sizeof(float)*2 );
 }

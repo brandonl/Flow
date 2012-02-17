@@ -1,6 +1,8 @@
-#include "window.h"
+#define GLFW_NO_GLU
+#include <GL/glfw.h>
+#include "Window.h"
 #include <iostream>
-#include "input.h"
+#include "Input.h"
 
 Window *Window::instance = NULL;
 
@@ -41,6 +43,10 @@ void Window::init( const std::string& ntitle, int w, int h, int cdepth, int zdep
 	center();
 
 	glfwSetWindowTitle( title.c_str() );
+   glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
+   glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
+   glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
+	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Disable polling on swap buffers; we will call on our own terms.
 	glfwDisable( GLFW_AUTO_POLL_EVENTS );

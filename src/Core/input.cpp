@@ -1,6 +1,8 @@
 #include <iostream>
-#include "input.h"
-#include "window.h"
+#include "Input.h"
+#include "Window.h"
+#define GLFW_NO_GLU
+#include <GL/glfw.h>
 
 Input *Input::instance = NULL;
 

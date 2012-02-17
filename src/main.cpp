@@ -1,8 +1,9 @@
 #define WIN32_LEAN_AND_MEAN   // This trims down the libraries.
 #define VC_LEANMEAN           // Trims even farther.
-#include "opening.h"
-#include "Core/debug.h"
-#include "Core/app.h"
+#include "Core/App.h"
+#include "Opening.h"
+#include "Core/Debug.h"
+#include <sstream>
 
 namespace
 {
@@ -42,19 +43,19 @@ namespace
 		exit(2);
 	}
 
-	inline void check_error( const std::string& error_msg )
+	inline void checkError( const std::string& errorMsg )
 	{
-		const GLenum error_val = glGetError();
+		const GLenum errorVal = glGetError();
 
-		if( error_val != GL_NO_ERROR )
+		if( errorVal != GL_NO_ERROR )
 		{
 			std::stringstream ss;
-			ss << error_val;
-			debug() << "GL_Renderer::check_error: " << error_msg << " with error code " << ss.str() << std::endl;
+			ss << errorVal;
+			debug() << "GL_Renderer::checkError: " << errorMsg << " with error code " << ss.str() << std::endl;
 		}
 	}
 	
-	void init_main()
+	void initMain()
 	{
 		if( glDebugMessageCallbackARB )
 		{
@@ -74,7 +75,7 @@ namespace
 		// Prepare GL context.
 		///////////////////////////////////////////////////////////////
 		glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
-		glClearColor( 0.4f, 0.4f, 0.4f, 1.0f );
+		glClearColor( 0.7f, 0.7f, 0.7f, 1.0f );
 		glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
@@ -85,19 +86,18 @@ namespace
 
 };
 
-
 int main(int argc, char * argv[])
 {
 	App app;
 	app.init( "T H E g R E Y", 1024, 768 );
-	check_error( "APP INIT" );
+	checkError( "APP INIT" );
 
-	init_main(); // Context needs to be set up first	
-	check_error( "Context + GLEW INIT" );
+	initMain(); // Context needs to be set up first	
+	checkError( "Context + GLEW INIT" );
 
 	Opening *scene = new Opening();
 	scene->init();
-	check_error( "Scene INIT" );
+	checkError( "Scene INIT" );
 
 	app.set( scene );
 	app.run();

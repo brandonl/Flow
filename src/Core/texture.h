@@ -2,8 +2,9 @@
 #define __TEXTURE_H__
 
 #include <string>
+#include "Uncopyable.h"
 
-class Texture
+class Texture : private Uncopyable
 {
 	public:
 		explicit Texture();
@@ -11,6 +12,8 @@ class Texture
 
 		bool load(	const std::string& filename, float anisotropic_amount = 16);
 		unsigned int get_name() const;
+		void bind() const;
+		void unbind() const;
 
 	private:
 		void unload();

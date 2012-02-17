@@ -2,13 +2,12 @@
 #define WINDOW_H
 
 #include <string>
-#define GLFW_NO_GLU
-#include <GL/glfw.h>
+#include "Uncopyable.h"
 
-class Window
+class Window : private Uncopyable
 {
 	public:
-		explicit Window();
+		Window();
 		~Window();
 		void init( const std::string& , int, int, int, int );
 

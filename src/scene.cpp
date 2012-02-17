@@ -1,15 +1,13 @@
-#include "scene.h"
+#include "Scene.h"
 #include <string>
 
 Scene::Scene()
-	:	entity_id_counter(0)
+	:	entityIdCount(0)
 {
-	std::cout << "Creating Scene..." << this << std::endl;
 }
 
 Scene::~Scene()
 {
-	std::cout << "Destroying Scene..." << this << std::endl;
 }
 
 void Scene::update()
@@ -32,7 +30,7 @@ void Scene::draw()
 
 void Scene::add( Entity *ent )
 {
-	ent->id = entity_id_counter++;
+	ent->id = entityIdCount++;
 	std::cout << "Creating " << ent->tag << " with id " << ent->id << std::endl;
 	entities.push_back( std::shared_ptr<Entity>( ent ));
 }

@@ -1,23 +1,17 @@
 #ifndef OPENING_SCENE_H__
 #define OPENING_SCENE_H__
 
-#include "Core/camera.h"
-#include "Core/matrix_stack.h"
-#include "Core/buffer_object.h"
-#include "Core/shader.h"
-#include "Core/mesh.h"
-#include "Core/shapes.h"
-
-#include "scene.h"
-#include "Core/texture.h"
+#include "Scene.h"
+#include "VertexArray.h"
+#include "Core/BufferObject.h"
+#include "Core/Shader.h"
+#include "Core/Mesh.h"
+#include "Core/Texture.h"
 
 class Opening : public Scene
 {
 public:
-	Opening() : Scene()  
-	{
-	}
-
+	Opening();
 	~Opening();
 
 	void init();
@@ -25,15 +19,26 @@ public:
 	void draw();
 
 private:
-	Matrix_Stack mv, p;
-	Camera cam;
-	Mesh obj;
-	Texture texture;
+	VertexArray vao;
+	BufferObject vbo;
+	BufferObject ibo;
 
-	Buffer_Object vbo;
-	Buffer_Object ibo;
-	GLuint vao;
-	Shader shader;
+	struct Model
+	{
+		Shader *shader;
+		Texture texture;
+		Texture bumpMap;
+		Mesh mesh;
+		std::vector<unsigned short> indexes;
+		unsigned minix, maxix;
+	} obj;
+
+	Shader s1, s2;
+
+	Texture floorTexture;
+	VertexArray vaoFloor;
+	BufferObject vboFloor;
+	Mesh floorMesh;
 };
 
 #endif
