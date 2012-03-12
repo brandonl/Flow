@@ -4,18 +4,21 @@
 #include "Color.h"
 #include "Mesh.h"
 
-namespace shape
+namespace flow
 {
-	//-------------------------------------------------------------------
-	// Primitives code based off of source code from OpenGL SuperBible 5ed.
-	/////////////////////////////////////////////////////////////////////
-	void build_cube( float r, Mesh &mesh, const Color& col = Color() );
+	namespace shape
+	{
+		//-------------------------------------------------------------------
+		// Primitives code based off of source code from OpenGL SuperBible 5ed.
+		/////////////////////////////////////////////////////////////////////
+		void build_cube( float r, Mesh &mesh, const Color& col = Color() );
 
-	void build_sphere( float r, int lats, int longs, Mesh &mesh, const Color& col = Color() );
+		void build_sphere( float r, int lats, int longs, Mesh &mesh, const Color& col = Color() );
 
-	void build_torus( float outer_radius, float inner_radius, int num_major, int num_minor, Mesh &mesh, const Color& col = Color() );
+		void build_torus( float outer_radius, float inner_radius, int num_major, int num_minor, Mesh &mesh, const Color& col = Color() );
 
-	void build_bbox( const glm::vec3& min, const glm::vec3& max, Mesh &mesh, const Color& col = Color() );
+		void build_bbox( const glm::vec3& min, const glm::vec3& max, Mesh &mesh, const Color& col = Color() );
+	};
 };
 
 #endif

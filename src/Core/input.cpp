@@ -1,15 +1,16 @@
-#include <iostream>
+#include <cstdio>
 #include "Input.h"
-#include "Window.h"
 #define GLFW_NO_GLU
 #include <GL/glfw.h>
 
-Input *Input::instance = NULL;
+using namespace flow;
+
+Input *Input::instance = nullptr;
 
 Input::Input()
 {
-	if( instance != NULL )
-		std::cerr << "Only one Input context may be active at a time.";
+	if( instance != nullptr )
+		printf( "Only one Input context may be active at a time.\n" );
 	instance = this;
 }
 
@@ -19,93 +20,98 @@ Input::~Input()
 
 void Input::init()
 {
+	glfwSetKeyCallback( keyEvent );
+	glfwSetMouseButtonCallback( mouseDownEvent );
+	glfwSetMousePosCallback( mouseMoveEvent );
+
 	for( unsigned int i = 0; i < MAX_KEYS; ++i )
-		prev_key_events[i] = curr_key_events[i] = key_events[i] = false;
+		prevKeyEvents[i] = currKeyEvents[i] = keyEvents[i] = false;
 
 	for( unsigned int i = 0; i < MAX_MOUSE_BUTTONS; ++i )
-		prev_mouse_buttons[i] = curr_mouse_buttons[i] = mouse_button_events[i] = false;
+		prevMouseButtons[i] = currMouseButtons[i] = mouseButtonEvents[i] = false;
 }
 
 void Input::update()
 {
 	for( unsigned int i = 0; i < MAX_KEYS; ++i )
 	{
-		instance->prev_key_events[i] = instance->curr_key_events[i];
-		instance->curr_key_events[i] = instance->key_events[i];
+		instance->prevKeyEvents[i] = instance->currKeyEvents[i];
+		instance->currKeyEvents[i] = instance->keyEvents[i];
 	}
 
 	for( unsigned int i = 0; i < MAX_MOUSE_BUTTONS; ++i )
 	{
-		instance->prev_mouse_buttons[i] = instance->curr_mouse_buttons[i];
-		instance->curr_mouse_buttons[i] = instance->mouse_button_events[i];
+		instance->prevMouseButtons[i] = instance->currMouseButtons[i];
+		instance->currMouseButtons[i] = instance->mouseButtonEvents[i];
 	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // K E Y S A P I
 ///////////////////////////////////////////////////////////////////////////////
-void Input::key_event( int key, int action )
+void Input::keyEvent( int key, int action )
 {
-	instance->key_events[key] = action > 0 ? true : false;
+	instance->keyEvents[key] = action > 0 ? true : false;
 }
 
-bool Input::is_key_held( int k )
+bool Input::isKeyHeld( int k )
 {
-	return instance->curr_key_events[k];
+	return instance->currKeyEvents[k];
 }
 
-bool Input::is_key_pressed( int k )
+bool Input::isKeyPressed( int k )
 {
-	return instance->curr_key_events[k] && !instance->prev_key_events[k];
+	return instance->currKeyEvents[k] && !instance->prevKeyEvents[k];
 }
 
-bool Input::is_key_released( int k )
+bool Input::isKeyReleased( int k )
 {
-	return !instance->curr_key_events[k] && instance->prev_key_events[k];
+	return !instance->currKeyEvents[k] && instance->prevKeyEvents[k];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // M O U S E A P I
 ///////////////////////////////////////////////////////////////////////////////
-void Input::mouse_down_event( int key, int action )
+void Input::mouseDownEvent( int key, int action )
 {
-	instance->mouse_button_events[key] = action > 0 ? true : false;
+	instance->mouseButtonEvents[key] = action > 0 ? true : false;
 }
 
-void Input::mouse_move_event( int x, int y )
+void Input::mouseMoveEvent( int x, int y )
 {
-	instance->mouse_position = glm::vec2( x, y );
+	instance->mousePosition = glm::vec2( x, y );
 }
 
-bool Input::is_mouse_button_held( int b )
+bool Input::isMouseButtonHeld( int b )
 {
-	return instance->curr_mouse_buttons[b];
+	return instance->currMouseButtons[b];
 }
 
-bool Input::is_mouse_button_pressed( int b )
+bool Input::isMouseButtonPressed( int b )
 {
-	return instance->curr_mouse_buttons[b] && !instance->prev_mouse_buttons[b];
+	return instance->currMouseButtons[b] && !instance->prevMouseButtons[b];
 }
 
-bool Input::is_mouse_button_released( int b )
+bool Input::isMouseButtonReleased( int b )
 {
-	return !instance->curr_mouse_buttons[b] && instance->prev_mouse_buttons[b];
+	return !instance->currMouseButtons[b] && instance->prevMouseButtons[b];
 }
 
-glm::vec2 Input::get_mouse_position()
+glm::vec2 Input::getMousePosition()
 {
-	return glm::vec2( instance->mouse_position );
+	return glm::vec2( instance->mousePosition );
 }
 
-glm::vec2 Input::get_mouse_percentage()
+glm::vec2 Input::getMousePercentage()
 {
-	return glm::vec2( 	instance->mouse_position.x / Window::get_width(),
-					instance->mouse_position.y / Window::get_height() );
+	int w = 0, h = 0;
+	glfwGetWindowSize( &w, &h );
+	return glm::vec2( instance->mousePosition.x / w,
+							instance->mousePosition.y / h );
 }
 
-void Input::set_mouse_position( int x, int y )
+void Input::setMousePosition( int x, int y )
 {
 	glfwSetMousePos( x, y );
-	instance->mouse_position = glm::vec2( x, y );
+	instance->mousePosition = glm::vec2( x, y );
 }
-

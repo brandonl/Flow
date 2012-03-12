@@ -1,12 +1,18 @@
 #include "Vertex.h"
-#include <cstring>
-#include <iostream>
+#include <algorithm>
+
+using namespace flow;
+
 
 // Make sure Vertex size is a multiple of 32
-static_assert( sizeof( Vertex ) % 32 == 0, "Vertex data does not fit on mutliple of 32 bit slot" );
+//static_assert( sizeof( Vertex ) % 32 == 0, "Vertex data does not fit on mutliple of 32 bit slot" );
 
 Vertex::Vertex()
 {
+	position.fill(0.f);
+	texCoord.fill(0.f);
+	color.fill(0.f);
+	normal.fill(0.f);
 }
 
 Vertex::Vertex( float x, float y, float z, const Color& col )
@@ -14,12 +20,9 @@ Vertex::Vertex( float x, float y, float z, const Color& col )
 	position[0] = x;
 	position[1] = y;
 	position[2] = z;
-	memcpy( color, &col, sizeof(Color) );
-	tex0[0] = 0.0f;
-	tex0[1] = 0.0f;
-	memset( normal, 0, sizeof(float)*3 );
-	memset( tex1,	0, sizeof(float)*2 );
-	memset( tex2,	0, sizeof(float)*2 );
+	memcpy( &color[0], &col, sizeof(Color) );
+	texCoord.fill(0.f);
+	normal.fill(0.f);
 }
 
 Vertex::Vertex( float x, float y, float z, float u, float v, float normx, float normy, float normz, const Color& col )
@@ -27,13 +30,11 @@ Vertex::Vertex( float x, float y, float z, float u, float v, float normx, float 
 	position[0] = x;
 	position[1] = y;
 	position[2] = z;
-	tex0[0] = u;
-	tex0[1] = v;
-	memcpy( color, &col, sizeof(Color) );
+	texCoord[0] = u;
+	texCoord[1] = v;
+	memcpy( &color[0], &col, sizeof(Color) );
 	normal[0] = normx;
 	normal[1] = normy;
 	normal[2] = normz;
-	memset( tex1,	0, sizeof(float)*2 );
-	memset( tex2,	0, sizeof(float)*2 );
 }
 

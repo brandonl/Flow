@@ -1,40 +1,36 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef __WINDOW_H__
+#define __WINDOW_H__
 
 #include <string>
-#include "Uncopyable.h"
+#include "Utils.h"
 
-class Window : private Uncopyable
+namespace flow
 {
-	public:
-		Window();
-		~Window();
-		void init( const std::string& , int, int, int, int );
+	class Window : private Uncopyable
+	{
+		friend class App;
 
-		static void		update();
-		static void		clear();
-		static void		swap_buffers();
-		static bool		is_open();
-		static int		get_width();
-		static int		get_height();
-		static float	get_aspect_ratio();
-		static double	tick();
-		static void		set_title( const std::string& );
-		static void		center();
-		static int		*display_size();
+		private:
+			explicit Window( const std::string& title, int w = 800, int h = 600, int cdepth = 32, int zdepth = 24 );
+			~Window();
 
-	private:
-		std::string title;
-		int width;
-		int height; 	
-		int cdepth; 		
-		int zbdepth; 			
-		float ratio;		
+			void update();
+			void clear();
+			void swapBuffers();
+			bool isOpen();
+			void close();
+			void center();
+			static void		windowResizeCB( int width, int height );
 
-		static Window *instance;
-		static void key_event_callback( int, int );
-		static void mouse_button_callback( int, int );
-		static void mouse_position_callBack( int, int );
+		public:
+			static void				setTitle( const std::string& );
+			static const float	getAspectRatio();
+			static const int		getWidth();
+			static const int		getHeight();
+			static const int		getDisplayWidth();
+			static const int		getDisplayHeight();
+			static const double	getTime();
+	};
+
 };
-
 #endif

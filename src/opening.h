@@ -1,22 +1,24 @@
 #ifndef OPENING_SCENE_H__
 #define OPENING_SCENE_H__
 
-#include "Scene.h"
-#include "VertexArray.h"
+#include "Core/App.h"
+#include "Core/VertexArray.h"
 #include "Core/BufferObject.h"
-#include "Core/Shader.h"
 #include "Core/Mesh.h"
-#include "Core/Texture.h"
+#include "Core/Texture2.h"
+#include "Core/GPUProgram.h"
 
-class Opening : public Scene
+using namespace flow;
+
+class Opening : public App
 {
 public:
 	Opening();
 	~Opening();
 
-	void init();
-	void update();
-	void draw();
+	void doInit();
+	void doUpdate();
+	void doDraw();
 
 private:
 	VertexArray vao;
@@ -25,20 +27,14 @@ private:
 
 	struct Model
 	{
-		Shader *shader;
-		Texture texture;
-		Texture bumpMap;
 		Mesh mesh;
+		Texture2 texture;
+		GPUProgram shader;
 		std::vector<unsigned short> indexes;
 		unsigned minix, maxix;
-	} obj;
-
-	Shader s1, s2;
-
-	Texture floorTexture;
-	VertexArray vaoFloor;
-	BufferObject vboFloor;
-	Mesh floorMesh;
+	};
+	Model model;
+	GLuint texture1;
 };
 
 #endif

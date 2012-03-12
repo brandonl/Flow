@@ -1,75 +1,60 @@
 #include "App.h"
-#include "Debug.h"
-#include "LexicalCast.h"
-#include "../Scene.h"
-
+#include "Utils.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
 using namespace glm;
+using namespace flow;
 
 const float App::DELTA_TIME = 1.0f/60.0f;
-App *App::instance = 0;
 
-App::App() 
-	: scene(0), running(true)
-{
-	if( instance != NULL )
-		std::cerr << "Only one App context may be active at a time.";
-	instance = this;
-}
-
-App::~App()
+App::App( const std::string &name, int width, int height )
+	:	window( name, width, height )
 {
 }
 
-void App::init( const std::string& name, unsigned int width, unsigned int height  )
+void App::baseInit()
 {
-	window.init( name, width, height, 32, 24 );
 	input.init();
 
-	p.modify( perspective( 35.0f, static_cast<float>( Window::get_width() ) / Window::get_height(), 0.1f, 100.0f ) );
-	cam.set(	vec3( 0.0f, 5.0f, -20.0f ), vec3( 0.0f, 0.0f, 0.0f ), vec3( 0.0f, 1.0f, 0.0f ) );
-}
-
-void App::set( Scene* s )
-{
-	scene = s;
+	p.modify(	perspective( 35.0f, 
+					static_cast<float>( window.getWidth() ) / window.getHeight(), 
+					0.1f, 100.0f ) 
+				);
+	cam.set(	vec3( 0.0f, 5.0f, -20.0f ), 
+				vec3( 0.0f, 0.0f, 0.0f ), 
+				vec3( 0.0f, 1.0f, 0.0f )
+				);
 }
 
 void App::run()
 {
-	double last_tick = Window::tick();
+	double last_tick = window.getTime();
 	double time_since_last_update = 0.0;
-
-	while( running && Window::is_open() )
+	bool running = true;
+	while( running && window.isOpen() )
 	{
-		Window::update();
+		window.update();
 
-		time_since_last_update += Window::tick() - last_tick;
-		last_tick = Window::tick();
+		time_since_last_update += window.getTime() - last_tick;
+		last_tick = window.getTime();
 		if( time_since_last_update >= DELTA_TIME )
 		{
 			Input::update();
-			if( Input::is_key_pressed( Input::ESC ) )
-				quit();
+			if( Input::isKeyPressed( Input::ESC ) )
+				running = false;
 
-			model_view().set( lookAt( cam.position, App::cam.focus, cam.up_direction ) );
+			mv.set( lookAt( cam.position, cam.focus, cam.upDir ) );
 			cam.update();
 
-			scene->update();
+			doUpdate();
 			time_since_last_update = 0;
 		}
 
-		Window::clear();
-		scene->draw();
-		Window::swap_buffers();
+		window.clear();
+		doDraw();
+		window.swapBuffers();
 	}
-}
-
-
-void App::quit()
-{
-	running = false;
 }
 
 std::string App::fps()
@@ -80,7 +65,7 @@ std::string App::fps()
    static double prev_sec = 0.0f;
 
    FPS++;
-   next_sec = Window::tick();				
+   next_sec = Window::getTime();				
 
    if( next_sec - prev_sec > 1.0f )
    {
@@ -89,19 +74,4 @@ std::string App::fps()
 		FPS = 0;
    }
 	return fpsstr;
-}
-
-Camera& App::camera()
-{	
-	return instance->cam;
-}
-
-MatrixStack& App::model_view()
-{
-	return instance->mv;
-}
-
-MatrixStack& App::projection()
-{
-	return instance->p;
 }

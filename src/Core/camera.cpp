@@ -4,6 +4,8 @@
 #include "Input.h"
 #include "Window.h"
 
+using namespace flow;
+
 Camera::Camera()
 {
 	CAM_UP		=	0.11f;        
@@ -22,31 +24,31 @@ void Camera::set( const glm::vec3&  p, const glm::vec3&  v, const glm::vec3&  u 
 {
 	position = p;
 	focus = v;
-	up_direction = u;
+	upDir = u;
 }
 
 void Camera::update()
 {
-	glm::vec2 mp = Input::get_mouse_position();
-	Input::set_mouse_position(  Window::get_width() >> 1, Window::get_height() >> 1 );
-	rotate( mp, Window::get_width() >> 1, Window::get_height() >> 1 );
+	glm::vec2 mp = Input::getMousePosition();
+	Input::setMousePosition(  Window::getWidth() >> 1, Window::getHeight() >> 1 );
+	rotate( mp, Window::getWidth() >> 1, Window::getHeight() >> 1 );
 
-	if( Input::is_key_held( 'W' ) ) 
+	if( Input::isKeyHeld( 'W' ) ) 
 		move( CAM_UP );
 
-	if( Input::is_key_held( 'S' ) ) 
+	if( Input::isKeyHeld( 'S' ) ) 
 		move( CAM_DOWN );
 
-	if( Input::is_key_held( 'A' ) )
+	if( Input::isKeyHeld( 'A' ) )
 		rotate( CAM_LEFT, glm::vec3( 0.0f, 1.0f, 0.0f ) ); 
 
-	if( Input::is_key_held('D' ) )
+	if( Input::isKeyHeld('D' ) )
 		rotate( CAM_RIGHT, glm::vec3( 0.0f, 1.0f, 0.0f ) );
 
-	if( Input::is_key_held( 'Q' ) )
+	if( Input::isKeyHeld( 'Q' ) )
 		strafe( STRAFE_LEFT ); 
 
-	if( Input::is_key_held( 'E' ) )
+	if( Input::isKeyHeld( 'E' ) )
 		strafe( STRAFE_RIGHT );
 }
 
@@ -98,31 +100,31 @@ void Camera::rotate( float angle, const glm::vec3&  speed )
 	focus = position + new_look_direction;
 }
 
-void Camera::rotate( const glm::vec2& mouse_position, int mid_x, int mid_y )
+void Camera::rotate( const glm::vec2& mousePos, int mid_x, int mid_y )
 {
 	float y_dir = 0.0f;
 	float y_rot = 0.0f;
 
-	if( ( mouse_position.x == mid_x ) && ( mouse_position.y == mid_y ) )
+	if( ( mousePos.x == mid_x ) && ( mousePos.y == mid_y ) )
 		return;
 
-	y_dir = (float)( mid_x - mouse_position.x ) / 1000.0f;
-	y_rot = (float)( mid_y - mouse_position.y ) / 1000.0f;
+	y_dir = (float)( mid_x - mousePos.x ) / 1000.0f;
+	y_rot = (float)( mid_y - mousePos.y ) / 1000.0f;
 
-	last_rotation_angle -= y_rot;
+	lastRotAngle -= y_rot;
 
-	if( last_rotation_angle > 1.0f )
+	if( lastRotAngle > 1.0f )
 	{
-		last_rotation_angle = 1.0f;
+		lastRotAngle = 1.0f;
 		return;
 	}
-	if( last_rotation_angle < -1.0f )
+	if( lastRotAngle < -1.0f )
 	{
-		last_rotation_angle = -1.0f;
+		lastRotAngle = -1.0f;
 		return;
 	}
 
-	glm::vec3 perp_focus_axis = glm::cross( ( focus - position ), up_direction );
+	glm::vec3 perp_focus_axis = glm::cross( ( focus - position ), upDir );
 
 	perp_focus_axis = glm::normalize( perp_focus_axis );
 	rotate( y_rot, perp_focus_axis );
@@ -131,15 +133,15 @@ void Camera::rotate( const glm::vec2& mouse_position, int mid_x, int mid_y )
 
 void Camera::strafe( float direction )
 {
-	calculate_strafe();
-	update( strafe_direction, direction );
+	calculateStrafe();
+	update( strafeDir, direction );
 }
 
-void Camera::calculate_strafe()
+void Camera::calculateStrafe()
 {
 	glm::vec3 direction = focus - position;
 	direction = glm::normalize( direction );
 
-	glm::vec3 cross = glm::cross( direction, up_direction );
-	strafe_direction = cross;
+	glm::vec3 cross = glm::cross( direction, upDir );
+	strafeDir = cross;
 }

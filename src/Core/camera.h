@@ -3,36 +3,39 @@
 
 #include <glm/glm.hpp>
 
-class Camera
+namespace flow
 {
-	public:
-		Camera();
-		~Camera();
+	class Camera
+	{
+		public:
+			Camera();
+			~Camera();
 
-		void set( const glm::vec3& p, const glm::vec3& v, const glm::vec3& u );
-		void update();
-		void update( const glm::vec3& direction, float dir );
+			void set( const glm::vec3& p, const glm::vec3& v, const glm::vec3& u );
+			void update();
+			void update( const glm::vec3& direction, float dir );
 
-		void move( float direction );
-		void rotate( float angle, const glm::vec3& speed );
-		void rotate( const glm::vec2& mouse_position, int mid_x, int mid_y );
-		void strafe( float direction );
+			void move( float direction );
+			void rotate( float angle, const glm::vec3& speed );
+			void rotate( const glm::vec2& mousePos, int mid_x, int mid_y );
+			void strafe( float direction );
 
-		void calculate_strafe();
+			void calculateStrafe();
 
-		glm::vec3 position;
-		glm::vec3 focus;
-		glm::vec3 up_direction;
-		glm::vec3 strafe_direction;
-		float last_rotation_angle;
+			glm::vec3 position;
+			glm::vec3 focus;
+			glm::vec3 upDir;
+			glm::vec3 strafeDir;
+			float lastRotAngle;
 
-	private:
-		float CAM_UP;
-		float CAM_DOWN;
-		float CAM_LEFT;
-		float CAM_RIGHT;
-		float STRAFE_LEFT;
-		float STRAFE_RIGHT;
+		private:
+			float CAM_UP;
+			float CAM_DOWN;
+			float CAM_LEFT;
+			float CAM_RIGHT;
+			float STRAFE_LEFT;
+			float STRAFE_RIGHT;
+	};
 };
 
 #endif

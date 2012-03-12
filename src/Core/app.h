@@ -6,37 +6,41 @@
 #include <string>
 #include "Camera.h"
 #include "MatrixStack.h"
-#include "Uncopyable.h"
+#include "Utils.h"
 
-class Scene;
-
-class App : private Uncopyable
+namespace flow
 {
-	public:
-		static const float DELTA_TIME;
+	class App : private Uncopyable
+	{
+		public:
+			App( const std::string& name, int width = 800, int height = 600 );
+			void run();
+			void init();
 
-		App();
-		~App();
+		protected:
+			static std::string fps();
 
-		void run();
-		void init( const std::string& name ="F L O W", unsigned width = 800, unsigned height = 600 );
-		void set( Scene* );
+		private:
+			void baseInit();
+			virtual void doUpdate() = 0;
+			virtual void doDraw() = 0;
+			virtual void doInit() = 0;
+			static const float DELTA_TIME;
 
-		static std::string fps();
-		static Camera& camera();
-		static MatrixStack& model_view();
-		static MatrixStack& projection();
+		protected:
+			Camera cam;
+			MatrixStack mv;
+			MatrixStack p;
 
-	private:
-		static App *instance;
-		void quit();
-		Window window;
-		Input input;
-		Scene *scene;
+		private:
+			Window window;
+			Input input;
+	};
 
-		Camera cam;
-		MatrixStack mv;
-		MatrixStack p;
-		bool running;
+	inline void App::init()
+	{
+		baseInit();
+		doInit();
+	}
 };
 #endif

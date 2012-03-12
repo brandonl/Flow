@@ -19,49 +19,31 @@
     <Filter Include="Core\Platform">
       <UniqueIdentifier>{f0bda671-2e9b-4a51-9e88-ae4e3020cccc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Resources">
+      <UniqueIdentifier>{ba292ff5-6968-4d64-bccf-f087b1127e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Geometry">
+      <UniqueIdentifier>{71687314-65bb-4ff0-8354-4d0ee40903dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GPU">
+      <UniqueIdentifier>{636abe2d-e012-4e32-99f0-e3e40ffc5041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Assets">
+      <UniqueIdentifier>{cafabe83-734e-4c37-ba31-23e5fac8526c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Resources\STB">
+      <UniqueIdentifier>{c7350a78-7bc1-414e-851d-39901dd20860}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\OBJLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Indexer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\BufferObject.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Core\Camera.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Color.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\MatrixStack.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Mesh.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Polygon.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Shader.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Texture.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Core\Vertex.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Input.h">
-      <Filter>Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Window.h">
-      <Filter>Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Debug.h">
-      <Filter>Core\Platform</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\App.h">
       <Filter>Core\Platform</Filter>
@@ -69,61 +51,85 @@
     <ClInclude Include="src\Opening.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Core\Utils.h">
+      <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\VertexArray.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Core\Color.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ResourceModule.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Resource.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Image.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ImageRef.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Window.h">
+      <Filter>Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Input.h">
+      <Filter>Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Mesh.h">
+      <Filter>Core\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Shapes.h">
+      <Filter>Core\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ShaderSource.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ShaderRef.h">
+      <Filter>Core\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\GPUKernel.h">
+      <Filter>Core\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Texture2.h">
+      <Filter>Core\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\GPUProgram.h">
+      <Filter>Core\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Settings.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\LexicalCast.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="src\Core\Indexer.h">
+      <Filter>Core\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Uncopyable.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="src\Core\OBJLoader.h">
+      <Filter>Core\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="src\Particles.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Core\stb_truetype.h">
+      <Filter>Core\Resources\STB</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\stb_image.hpp">
+      <Filter>Core\Resources\STB</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Plane.h">
+      <Filter>Core\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\VertexArray.h">
+      <Filter>Core\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\BufferObject.h">
+      <Filter>Core\GPU</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Indexer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\OBJLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\Camera.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Color.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\MatrixStack.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Mesh.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Polygon.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Shader.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Texture.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\Core\Vertex.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Input.cpp">
-      <Filter>Core\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Window.cpp">
-      <Filter>Core\Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\App.cpp">
       <Filter>Core\Platform</Filter>
@@ -134,14 +140,53 @@
     <ClCompile Include="src\Opening.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Shapes.cpp">
+    <ClCompile Include="src\Core\Color.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Particles.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Core\Resource.cpp">
+      <Filter>Core\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Image.cpp">
+      <Filter>Core\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Window.cpp">
+      <Filter>Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Input.cpp">
+      <Filter>Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Mesh.cpp">
+      <Filter>Core\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Shapes.cpp">
+      <Filter>Core\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\ShaderSource.cpp">
+      <Filter>Core\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Texture2.cpp">
+      <Filter>Core\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\GPUKernel.cpp">
+      <Filter>Core\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\GPUProgram.cpp">
+      <Filter>Core\GPU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Indexer.cpp">
+      <Filter>Core\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\OBJLoader.cpp">
+      <Filter>Core\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\stb_image.cpp">
+      <Filter>Core\Resources\STB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Libs\gl3w\src\gl3w.c">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Plane.cpp">
+      <Filter>Core\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
