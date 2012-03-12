@@ -93,6 +93,7 @@
     <ClInclude Include="src\Core\Input.h" />
     <ClInclude Include="src\Core\MatrixStack.h" />
     <ClInclude Include="src\Core\Mesh.h" />
+    <ClInclude Include="src\Core\Model.h" />
     <ClInclude Include="src\Core\OBJLoader.h" />
     <ClInclude Include="src\Core\Plane.h" />
     <ClInclude Include="src\Core\Resource.h" />
